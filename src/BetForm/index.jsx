@@ -4,7 +4,6 @@ import { Button, Form, Input, Select } from "antd";
 import { BetLeague } from "./BetLeague";
 import { useState } from "react";
 import { GameContext } from "../context";
-import { createData } from "../Betslip";
 
 const { Option } = Select;
 const layout = {
@@ -23,7 +22,7 @@ const tailLayout = {
 };
 
 export const BetForm = ({ setBetSlipOpenHandler, language }) => {
-  const { betGames, setBetGames } = useContext(GameContext);
+  const { setBetGames } = useContext(GameContext);
   const [isSport, setIsSport] = useState("football");
   const [isLang, setIsLang] = useState("en");
   const [form] = Form.useForm();

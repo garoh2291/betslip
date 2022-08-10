@@ -1,7 +1,5 @@
-import { Form, Input, Select } from "antd";
-import { Option } from "antd/lib/mentions";
+import { Form, Input } from "antd";
 import React from "react";
-import { LEAGUE_DATA } from "../../data";
 
 export const BetLeague = ({ isSport, isLang }) => {
   return (
