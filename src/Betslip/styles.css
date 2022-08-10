@@ -1,0 +1,16 @@
+.betslip_wrapper {
+  margin-top: 20px;
+  margin-left: 50px;
+  max-width: 750px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 300px;
+  background-color: #fff;
+  box-shadow: 10px 30px 35px 10px #c7c7c7;
+}
+
+.table_row {
+  height: 50px !important;
+}
