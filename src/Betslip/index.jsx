@@ -70,18 +70,8 @@ function DenseTable({ lang }) {
               <TableCell align="center">{row.league}</TableCell>
               <TableCell align="center">
                 <div className="event_teams">
-                  <div className="event_span_left">
-                    <div>{row.team1}</div>{" "}
-                  </div>
-                  <div className="event_span_line">
-                    {" "}
-                    <HorizontalRuleIcon
-                      sx={{ ml: 1, mr: 1, color: "#A20A1B" }}
-                    />
-                  </div>
-                  <div className="event_span_right">
-                    <div>{row.team2}</div>{" "}
-                  </div>{" "}
+                  <span>{row.team1}</span>
+                  <span>{row.team2}</span>{" "}
                 </div>
               </TableCell>
               <TableCell
@@ -100,9 +90,20 @@ function DenseTable({ lang }) {
 }
 
 export const Betslip = ({ lang, isDate, isTime }) => {
+  const { betGames } = useContext(GameContext);
+
+  function logoPos(games) {
+    if (games.length > 2) {
+      return "22px";
+    }
+    return 0;
+  }
   return (
     <div className="betslip_wrapper" id="my-node">
-      <div className="betslip_image">
+      <div
+        className="betslip_image"
+        style={{ top: `calc(40px + ${logoPos(betGames)} )` }}
+      >
         {" "}
         <img src={mainImg} alt="some" />
       </div>

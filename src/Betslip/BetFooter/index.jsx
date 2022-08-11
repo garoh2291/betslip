@@ -8,8 +8,8 @@ export const BetFooter = ({ isTime, isDate, lang }) => {
   console.log(betGames);
 
   const totalCf = betGames.reduce((sum, game) => {
-    return (sum += game.cf);
-  }, 0);
+    return (sum *= game.cf);
+  }, 1);
 
   const month = `${isDate[3]}${isDate[4]}`;
   const date = `${isDate[0]}${isDate[1]} ${MONTHS[month][lang]} ${isDate[6]}${isDate[7]}${isDate[8]}${isDate[9]}`;
