@@ -94,9 +94,15 @@ export const Betslip = ({ lang, isDate, isTime }) => {
 
   function logoPos(games) {
     if (games.length > 2) {
-      return "22px";
+      if (games.length === 3) {
+        return "23px";
+      } else if (games.length === 4) {
+        return "46px";
+      } else {
+        return `${games.length * 11.5}px`;
+      }
     }
-    return 0;
+    return "0px";
   }
   return (
     <div className="betslip_wrapper" id="my-node">
