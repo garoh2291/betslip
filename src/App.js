@@ -4,24 +4,51 @@ import { Betslip } from "./Betslip";
 import { GameContextProvider } from "./context/providers";
 import { useState } from "react";
 import { BetForm } from "./BetForm";
+import domtoimage from "dom-to-image";
+import { saveAs } from "file-saver";
 
 function App() {
   const [language, setLanguage] = useState("arm");
   const [isBetslipOpen, setBetslipOpen] = useState(false);
+  const [isDate, setIsDate] = useState("");
+  const [isTime, setIsTime] = useState("");
 
-  const setBetSlipOpenHandler = (lang) => {
-    setBetslipOpen(true);
+  const setBetslipLanguage = (lang) => {
     setLanguage(lang);
   };
+
+  const setBetSlipOpenHandler = (data) => {
+    setBetslipOpen(data);
+  };
+
+  ///
+  const downloadHandler = (event) => {
+    event.preventDefault();
+    domtoimage
+      .toBlob(document.getElementById("my-node1"))
+      .then(function (blob) {
+        saveAs(blob, "myImage.jpg");
+      });
+  };
+  ///
 
   return (
     <GameContextProvider>
       <div className="App">
         <BetForm
           setBetSlipOpenHandler={setBetSlipOpenHandler}
+          setBetslipLanguage={setBetslipLanguage}
           language={language}
+          setIsDate={setIsDate}
+          setIsTime={setIsTime}
         />
-        {isBetslipOpen && <Betslip lang={language} />}
+
+        <button onClick={downloadHandler.bind(this)}>Download</button>
+        <div className="betslip_main" id="my-node1">
+          {isBetslipOpen && (
+            <Betslip lang={language} isDate={isDate} isTime={isTime} />
+          )}
+        </div>
       </div>
     </GameContextProvider>
   );

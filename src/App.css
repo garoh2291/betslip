@@ -3,3 +3,12 @@
   height: 100vh;
   padding: 30px;
 }
+
+.betslip_main {
+  width: 900px;
+  height: 600px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

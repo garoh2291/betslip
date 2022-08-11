@@ -1,6 +1,6 @@
 .bet_form_wrapper {
   width: 600px;
-  height: 200px;
+  min-height: 200px;
   border: 1px solid;
   margin: 30px 50px;
 }

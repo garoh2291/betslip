@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import "./styles.css";
-import { Button, Form, Input, Select } from "antd";
+import { Button, DatePicker, Form, Input, Select, TimePicker } from "antd";
 import { BetLeague } from "./BetLeague";
 import { useState } from "react";
 import { GameContext } from "../context";
+const format = "HH:mm";
 
 const { Option } = Select;
 const layout = {
@@ -21,17 +22,34 @@ const tailLayout = {
   },
 };
 
-export const BetForm = ({ setBetSlipOpenHandler, language }) => {
+export const BetForm = ({
+  setBetSlipOpenHandler,
+  setBetslipLanguage,
+  language,
+  setIsDate,
+  setIsTime,
+}) => {
   const { setBetGames } = useContext(GameContext);
   const [isSport, setIsSport] = useState("football");
   const [isLang, setIsLang] = useState("en");
   const [form] = Form.useForm();
 
+  const onDateChange = (date, dateString) => {
+    console.log(dateString);
+    setIsDate(dateString);
+  };
+
+  const onTimeChange = (time, timeString) => {
+    console.log(timeString);
+    setIsTime(timeString);
+  };
+
   const onFinish = (values) => {
     const newBet = {
       sport: values.sport,
       league: values.league,
-      event: `${values.team1} - ${values.team2}`,
+      team1: values.team1,
+      team2: values.team2,
       bet: values.bet,
       cf: parseFloat(values.cf),
     };
@@ -40,15 +58,20 @@ export const BetForm = ({ setBetSlipOpenHandler, language }) => {
       return [...prev, newBet];
     });
 
-    setBetSlipOpenHandler(values.language);
+    setBetSlipOpenHandler(true);
+    form.resetFields();
   };
 
   const onReset = () => {
     form.resetFields();
+    setBetSlipOpenHandler("", false);
+    setBetGames("");
   };
 
   const onLangChange = (e) => {
+    console.log(e);
     setIsLang(e);
+    setBetslipLanguage(e);
   };
 
   const onSportChange = (e) => {
@@ -57,31 +80,51 @@ export const BetForm = ({ setBetSlipOpenHandler, language }) => {
   };
   return (
     <div className="bet_form_wrapper">
+      <Form.Item>
+        <Input.Group compact>
+          <Form.Item name={"language"} noStyle rules={[{ required: true }]}>
+            <Select
+              placeholder="Select Language"
+              style={{ width: "34%" }}
+              onChange={onLangChange}
+            >
+              <Option value="arm">Armenian</Option>
+              <Option value="ru">Russian</Option>
+              <Option value="en">English</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item name={"date"} noStyle rules={[{ required: true }]}>
+            <DatePicker
+              onChange={onDateChange}
+              format="DD MM YYYY"
+              style={{ width: "33%" }}
+              // defaultValue={moment()}
+            />
+          </Form.Item>
+          <Form.Item name={"time"} noStyle rules={[{ required: true }]}>
+            <TimePicker
+              // defaultValue={moment("12:08", format)}
+              format={format}
+              onChange={onTimeChange}
+              style={{ width: "33%" }}
+            />
+          </Form.Item>
+        </Input.Group>
+      </Form.Item>
       <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
         <Form.Item>
           <Input.Group compact>
-            <Form.Item name={"language"} noStyle rules={[{ required: true }]}>
-              <Select
-                placeholder="Select Language"
-                style={{ width: "33%" }}
-                onChange={onLangChange}
-              >
-                <Option value="arm">Armenian</Option>
-                <Option value="ru">Russian</Option>
-                <Option value="en">English</Option>
-              </Select>
-            </Form.Item>
             <Form.Item name={"sport"} noStyle rules={[{ required: true }]}>
               <Select
                 placeholder="Select Sport"
-                style={{ width: "33%" }}
+                style={{ width: "50%" }}
                 onChange={onSportChange}
               >
                 <Option value="football" default>
                   Football
                 </Option>
-                <Option value="basketball">Basketball</Option>
-                <Option value="handball">Handball</Option>
+                <Option value="volleyball">Volleyball</Option>
+                {/* <Option value="handball">Handball</Option> */}
                 <Option value="regby">Regby</Option>
                 <Option value="tennis">Tennis</Option>
                 <Option value="tabbleTennis">Table Tennis</Option>
@@ -107,6 +150,7 @@ export const BetForm = ({ setBetSlipOpenHandler, language }) => {
             </Form.Item>
           </Input.Group>
         </Form.Item>
+
         <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">
             Submit
