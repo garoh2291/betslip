@@ -135,7 +135,7 @@ export const BetForm = ({
                   Football
                 </Option>
                 <Option value="volleyball">Volleyball</Option>
-                {/* <Option value="handball">Handball</Option> */}
+                <Option value="basketball">BasketBall</Option>
                 <Option value="regby">Regby</Option>
                 <Option value="tennis">Tennis</Option>
                 <Option value="tabbleTennis">Table Tennis</Option>
