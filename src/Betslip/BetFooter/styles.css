@@ -18,6 +18,12 @@
 }
 
 .total_head {
+  width: 40%;
   font-size: 18px;
   font-weight: 600;
+}
+
+.footer_info {
+  width: 50%;
+  text-align: right;
 }

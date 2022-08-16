@@ -17,18 +17,18 @@ export const BetFooter = ({ isTime, isDate, lang }) => {
   return (
     <div className="bet_footer">
       <div className="total_Cf">
-        <span className="total_head">{BETSLIP_DATA.footerTotal[lang]}</span>
-        <span>{totalCf.toFixed(3)}</span>
+        <p className="total_head">{BETSLIP_DATA.footerTotal[lang]}</p>
+        <p className="footer_info">{totalCf.toFixed(3)}</p>
       </div>
       <div className="total_Cf">
-        <span className="total_head">{BETSLIP_DATA.footerDate[lang]}</span>
-        <span>{date}</span>
+        <p className="total_head">{BETSLIP_DATA.footerDate[lang]}</p>
+        <p className="footer_info">{date}</p>
       </div>
       <div className="total_Cf">
-        <span className="total_head">{BETSLIP_DATA.footerTime[lang]}</span>
-        <span>
+        <p className="total_head">{BETSLIP_DATA.footerTime[lang]}</p>
+        <p className="footer_info">
           {isTime} | {BETSLIP_DATA.footerZone[lang]}{" "}
-        </span>
+        </p>
       </div>
     </div>
   );

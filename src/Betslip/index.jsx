@@ -10,15 +10,14 @@ import "./styles.css";
 import { BETSLIP_DATA } from "../data";
 import { GameContext } from "../context";
 import mainImg from "../assets/logo.png";
-import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
 import { BetFooter } from "./BetFooter";
-import { capitalize, sportType } from "../helpers";
+import { sportType } from "../helpers";
 
 export function createData(sport, league, event, bet, cf) {
   return { sport, league, event, bet, cf };
 }
 
-function DenseTable({ lang }) {
+function DenseTable({ lang, isSlipActive }) {
   const { betGames } = useContext(GameContext);
   return (
     <TableContainer
@@ -78,9 +77,11 @@ function DenseTable({ lang }) {
                 align="center"
                 sx={{ color: "#0F7B0F", fontWeight: "600", fontSize: "11px" }}
               >
-                {row.bet}
+                {isSlipActive && row.bet}
               </TableCell>
-              <TableCell align="center">{row.cf.toFixed(2)}</TableCell>
+              <TableCell align="center">
+                {isSlipActive && row.cf.toFixed(2)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -89,7 +90,7 @@ function DenseTable({ lang }) {
   );
 }
 
-export const Betslip = ({ lang, isDate, isTime }) => {
+export const Betslip = ({ lang, isDate, isTime, isSlipActive }) => {
   const { betGames } = useContext(GameContext);
 
   function logoPos(games) {
@@ -113,7 +114,7 @@ export const Betslip = ({ lang, isDate, isTime }) => {
         {" "}
         <img src={mainImg} alt="some" />
       </div>
-      <DenseTable lang={lang} />
+      <DenseTable lang={lang} isSlipActive={isSlipActive} />
       <BetFooter isDate={isDate} isTime={isTime} lang={lang} />
     </div>
   );

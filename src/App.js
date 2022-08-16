@@ -10,6 +10,7 @@ import { saveAs } from "file-saver";
 function App() {
   const [language, setLanguage] = useState("arm");
   const [isBetslipOpen, setBetslipOpen] = useState(false);
+  const [isSlipActive, setIsSlipPromoActive] = useState(false);
   const [isDate, setIsDate] = useState("");
   const [isTime, setIsTime] = useState("");
 
@@ -27,7 +28,7 @@ function App() {
     domtoimage
       .toBlob(document.getElementById("my-node1"))
       .then(function (blob) {
-        saveAs(blob, "myImage.jpg");
+        saveAs(blob, "myImage.png");
       });
   };
   ///
@@ -41,12 +42,19 @@ function App() {
           language={language}
           setIsDate={setIsDate}
           setIsTime={setIsTime}
+          setIsSlipPromoActive={setIsSlipPromoActive}
+          isSlipActive={isSlipActive}
         />
 
         <button onClick={downloadHandler.bind(this)}>Download</button>
         <div className="betslip_main" id="my-node1">
           {isBetslipOpen && (
-            <Betslip lang={language} isDate={isDate} isTime={isTime} />
+            <Betslip
+              isSlipActive={isSlipActive}
+              lang={language}
+              isDate={isDate}
+              isTime={isTime}
+            />
           )}
         </div>
       </div>
