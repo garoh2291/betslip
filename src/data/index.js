@@ -42,7 +42,7 @@ export const BETSLIP_DATA = {
   footerZone: {
     arm: "Երևանյան ժամ.",
     ru: "Ереванское время",
-    en: "Yerevan Time ",
+    en: "GMT +0",
   },
 };
 
