@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
 import "./styles.css";
 import { Button, DatePicker, Form, Input, Select, TimePicker } from "antd";
-import { BetLeague } from "./BetLeague";
 import { useState } from "react";
 import { GameContext } from "../context";
+import { Typography } from "antd";
+import { uid } from "../helpers";
+
+const { Title } = Typography;
+
 const format = "HH:mm";
 
 const { Option } = Select;
@@ -54,11 +58,28 @@ export const BetForm = ({
 
   const onFinish = (values) => {
     const newBet = {
-      sport: values.sport,
-      league: values.league,
-      team1: values.team1,
-      team2: values.team2,
-      bet: values.bet,
+      id: uid(),
+      sport: isSport,
+      league: {
+        arm: values.leagueAm,
+        ru: values.leagueRu,
+        en: values.leagueEn,
+      },
+      team1: {
+        arm: values.team1Am,
+        ru: values.team1Ru,
+        en: values.team1En,
+      },
+      team2: {
+        arm: values.team2Am,
+        ru: values.team2Ru,
+        en: values.team2En,
+      },
+      bet: {
+        arm: values.betAm,
+        ru: values.betRu,
+        en: values.betEn,
+      },
       cf: parseFloat(values.cf),
     };
 
@@ -94,7 +115,7 @@ export const BetForm = ({
           <Form.Item name={"language"} noStyle rules={[{ required: true }]}>
             <Select
               placeholder="Select Language"
-              style={{ width: "34%" }}
+              style={{ width: "25%" }}
               onChange={onLangChange}
             >
               <Option value="arm">Armenian</Option>
@@ -106,56 +127,96 @@ export const BetForm = ({
             <DatePicker
               onChange={onDateChange}
               format="DD MM YYYY"
-              style={{ width: "33%" }}
+              style={{ width: "25%" }}
               inputReadOnly={true}
-              // defaultValue={moment()}
             />
           </Form.Item>
           <Form.Item name={"time"} noStyle rules={[{ required: true }]}>
             <TimePicker
-              // defaultValue={moment("12:08", format)}
               format={format}
               onChange={onTimeChange}
-              style={{ width: "33%" }}
+              style={{ width: "25%" }}
               inputReadOnly={true}
             />
+          </Form.Item>
+          <Form.Item name={"sport"} noStyle rules={[{ required: true }]}>
+            <Select
+              placeholder="Select Sport"
+              style={{ width: "25%" }}
+              onChange={onSportChange}
+            >
+              <Option value="football">Football</Option>
+              <Option value="volleyball">Volleyball</Option>
+              <Option value="basketball">BasketBall</Option>
+              <Option value="regby">Regby</Option>
+              <Option value="tennis">Tennis</Option>
+              <Option value="tabbleTennis">Table Tennis</Option>
+              <Option value="hockey">Hockey</Option>
+            </Select>
           </Form.Item>
         </Input.Group>
       </Form.Item>
       <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
         <Form.Item>
+          <Title level={5} style={{ textAlign: "center" }}>
+            Հայերեն
+          </Title>
           <Input.Group compact>
-            <Form.Item name={"sport"} noStyle rules={[{ required: true }]}>
-              <Select
-                placeholder="Select Sport"
-                style={{ width: "50%" }}
-                onChange={onSportChange}
-              >
-                <Option value="football" default>
-                  Football
-                </Option>
-                <Option value="volleyball">Volleyball</Option>
-                <Option value="basketball">BasketBall</Option>
-                <Option value="regby">Regby</Option>
-                <Option value="tennis">Tennis</Option>
-                <Option value="tabbleTennis">Table Tennis</Option>
-                <Option value="hockey">Hockey</Option>
-              </Select>
+            {/* <BetLeague isSport={isSport} isLang={isLang} /> */}
+            <Form.Item name={"leagueAm"} noStyle rules={[{ required: true }]}>
+              <Input placeholder="Լիգա" style={{ width: "25%" }} />
             </Form.Item>
-            <BetLeague isSport={isSport} isLang={isLang} />
+            <Form.Item name={"team1Am"} noStyle rules={[{ required: true }]}>
+              <Input placeholder="Թիմ 1" style={{ width: "25%" }} />
+            </Form.Item>
+            <Form.Item name={"team2Am"} noStyle rules={[{ required: true }]}>
+              <Input placeholder=" Թիմ 2" style={{ width: "25%" }} />
+            </Form.Item>
+            <Form.Item name={"betAm"} noStyle rules={[{ required: true }]}>
+              <Input placeholder="Դիրք" style={{ width: "25%" }} />
+            </Form.Item>
+          </Input.Group>
+        </Form.Item>
+        <Form.Item>
+          <Title level={5} style={{ textAlign: "center" }}>
+            Русский
+          </Title>
+          <Input.Group compact>
+            <Form.Item name={"leagueRu"} noStyle rules={[{ required: true }]}>
+              <Input placeholder="Лига" style={{ width: "25%" }} />
+            </Form.Item>
+            <Form.Item name={"team1Ru"} noStyle rules={[{ required: true }]}>
+              <Input placeholder="Команда 1" style={{ width: "25%" }} />
+            </Form.Item>
+            <Form.Item name={"team2Ru"} noStyle rules={[{ required: true }]}>
+              <Input placeholder=" Команда 2" style={{ width: "25%" }} />
+            </Form.Item>
+            <Form.Item name={"betRu"} noStyle rules={[{ required: true }]}>
+              <Input placeholder="Позиция" style={{ width: "25%" }} />
+            </Form.Item>
+          </Input.Group>
+        </Form.Item>
+        <Form.Item>
+          <Title level={5} style={{ textAlign: "center" }}>
+            English
+          </Title>
+          <Input.Group compact>
+            <Form.Item name={"leagueEn"} noStyle rules={[{ required: true }]}>
+              <Input placeholder="League" style={{ width: "25%" }} />
+            </Form.Item>
+            <Form.Item name={"team1En"} noStyle rules={[{ required: true }]}>
+              <Input placeholder="Team 1" style={{ width: "25%" }} />
+            </Form.Item>
+            <Form.Item name={"team2En"} noStyle rules={[{ required: true }]}>
+              <Input placeholder=" Team 2" style={{ width: "25%" }} />
+            </Form.Item>
+            <Form.Item name={"betEn"} noStyle rules={[{ required: true }]}>
+              <Input placeholder="Position" style={{ width: "25%" }} />
+            </Form.Item>
           </Input.Group>
         </Form.Item>
         <Form.Item>
           <Input.Group compact>
-            <Form.Item name={"team1"} noStyle rules={[{ required: true }]}>
-              <Input placeholder="Write Team 1" style={{ width: "25%" }} />
-            </Form.Item>
-            <Form.Item name={"team2"} noStyle rules={[{ required: true }]}>
-              <Input placeholder="Write Team 2" style={{ width: "25%" }} />
-            </Form.Item>
-            <Form.Item name={"bet"} noStyle rules={[{ required: true }]}>
-              <Input placeholder="Write Bet" style={{ width: "25%" }} />
-            </Form.Item>
             <Form.Item
               name={"cf"}
               noStyle
@@ -166,7 +227,7 @@ export const BetForm = ({
                 },
               ]}
             >
-              <Input placeholder="Write coefficent" style={{ width: "25%" }} />
+              <Input placeholder="Գործակից" style={{ width: "25%" }} />
             </Form.Item>
           </Input.Group>
         </Form.Item>

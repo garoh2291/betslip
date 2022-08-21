@@ -28,11 +28,6 @@
   position: relative;
 }
 
-.table_row {
-  min-height: 50px !important;
-  max-width: 750px;
-}
-
 .betslip_image {
   width: 45%;
   height: 220px;

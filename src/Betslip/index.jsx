@@ -11,14 +11,15 @@ import { BETSLIP_DATA } from "../data";
 import { GameContext } from "../context";
 import mainImg from "../assets/logo.png";
 import { BetFooter } from "./BetFooter";
-import { sportType } from "../helpers";
+import { BetBody } from "./BetBody";
 
 export function createData(sport, league, event, bet, cf) {
   return { sport, league, event, bet, cf };
 }
 
-function DenseTable({ lang, isSlipActive }) {
+function DenseTable({ lang, isSlipActive, editModalOpenHandler }) {
   const { betGames } = useContext(GameContext);
+  console.log(betGames);
   return (
     <TableContainer
       component={Paper}
@@ -51,38 +52,20 @@ function DenseTable({ lang, isSlipActive }) {
             <TableCell sx={{ fontWeight: "600", minWidth: 150 }} align="center">
               {BETSLIP_DATA.headBet[lang]}
             </TableCell>
-            <TableCell sx={{ fontWeight: "600" }} align="center">
+            <TableCell sx={{ fontWeight: "600", minWidth: 150 }} align="center">
               {BETSLIP_DATA.headCf[lang]}
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {betGames.map((row) => (
-            <TableRow
-              key={row.event}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              className="table_row"
-            >
-              <TableCell component="th" scope="row" align="center">
-                {sportType(row.sport)}
-              </TableCell>
-              <TableCell align="center">{row.league}</TableCell>
-              <TableCell align="center">
-                <div className="event_teams">
-                  <span>{row.team1}</span>
-                  <span>{row.team2}</span>{" "}
-                </div>
-              </TableCell>
-              <TableCell
-                align="center"
-                sx={{ color: "#0F7B0F", fontWeight: "600", fontSize: "11px" }}
-              >
-                {isSlipActive && row.bet}
-              </TableCell>
-              <TableCell align="center">
-                {isSlipActive && row.cf.toFixed(2)}
-              </TableCell>
-            </TableRow>
+            <BetBody
+              key={row.id}
+              isSlipActive={isSlipActive}
+              lang={lang}
+              row={row}
+              editModalOpenHandler={editModalOpenHandler}
+            />
           ))}
         </TableBody>
       </Table>
@@ -90,7 +73,13 @@ function DenseTable({ lang, isSlipActive }) {
   );
 }
 
-export const Betslip = ({ lang, isDate, isTime, isSlipActive }) => {
+export const Betslip = ({
+  lang,
+  isDate,
+  isTime,
+  isSlipActive,
+  editModalOpenHandler,
+}) => {
   const { betGames } = useContext(GameContext);
 
   function logoPos(games) {
@@ -114,7 +103,11 @@ export const Betslip = ({ lang, isDate, isTime, isSlipActive }) => {
         {" "}
         <img src={mainImg} alt="some" />
       </div>
-      <DenseTable lang={lang} isSlipActive={isSlipActive} />
+      <DenseTable
+        lang={lang}
+        isSlipActive={isSlipActive}
+        editModalOpenHandler={editModalOpenHandler}
+      />
       <BetFooter isDate={isDate} isTime={isTime} lang={lang} />
     </div>
   );

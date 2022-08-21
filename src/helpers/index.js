@@ -36,3 +36,7 @@ export function sportType(sport) {
       return <img src={soccer} alt="img" width={"30px"} height="30px" />;
   }
 }
+
+export const uid = function () {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+};
