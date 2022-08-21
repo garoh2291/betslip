@@ -10,8 +10,6 @@ export const BetFooter = ({ isTime, isDate, lang }) => {
     return (sum *= game.cf);
   }, 1);
 
-  console.log(isTime, lang);
-
   function timeLogic(isTime, isDate, lang) {
     const date0 = `${isDate[3]}${isDate[4]}/${isDate[0]}${isDate[1]}/${isDate[6]}${isDate[7]}${isDate[8]}${isDate[9]} ${isTime}`;
     var md = new Date(date0);
@@ -25,7 +23,6 @@ export const BetFooter = ({ isTime, isDate, lang }) => {
     } else if (lang === "en") {
       const forEn = milliseconds - 14400000;
       const date1 = new Date(forEn);
-      console.log(date1.toLocaleString("en-GB"));
       return date1.toLocaleString("en-GB");
     }
     return `${isDate}, ${isTime}`;

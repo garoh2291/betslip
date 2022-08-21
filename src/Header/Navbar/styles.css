@@ -1,0 +1,12 @@
+.navigation_bar_layout {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navigation_list {
+  display: flex;
+  flex-grow: auto;
+  align-items: center;
+  height: 100%;
+}

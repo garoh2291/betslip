@@ -141,3 +141,14 @@ export const MONTHS = {
     en: "December",
   },
 };
+
+export const NAVBAR_PAGES = {
+  builder: {
+    link: "",
+    label: "Builder",
+  },
+  statistic: {
+    link: "statistic",
+    label: "Statistic",
+  },
+};

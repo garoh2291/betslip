@@ -1,0 +1,13 @@
+.betslip_main {
+  width: 900px;
+  height: 600px;
+  border: 1px solid;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check_builder_main {
+  padding: 30px;
+}

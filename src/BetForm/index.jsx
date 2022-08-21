@@ -40,7 +40,6 @@ export const BetForm = ({
   const [form] = Form.useForm();
 
   const onDateChange = (date, dateString) => {
-    console.log(dateString);
     setIsDate(dateString);
   };
 
@@ -52,7 +51,6 @@ export const BetForm = ({
   };
 
   const onTimeChange = (time, timeString) => {
-    console.log(timeString);
     setIsTime(timeString);
   };
 
@@ -99,13 +97,11 @@ export const BetForm = ({
   };
 
   const onLangChange = (e) => {
-    console.log(e);
     setIsLang(e);
     setBetslipLanguage(e);
   };
 
   const onSportChange = (e) => {
-    console.log(e);
     setIsSport(e);
   };
   return (

@@ -18,7 +18,7 @@
 }
 
 .table_row {
-  min-height: 50px !important;
+  /* min-height: 50px !important; */
   max-width: 750px;
   position: relative;
 }

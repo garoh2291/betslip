@@ -8,7 +8,6 @@ const { Title } = Typography;
 export const EditModal = ({ onClose, editGame }) => {
   const { betGames, setBetGames } = useContext(GameContext);
   const { id } = editGame;
-  console.log(editGame);
 
   const [inputsData, setInputsData] = useState({
     cf: {

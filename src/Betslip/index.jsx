@@ -19,7 +19,6 @@ export function createData(sport, league, event, bet, cf) {
 
 function DenseTable({ lang, isSlipActive, editModalOpenHandler }) {
   const { betGames } = useContext(GameContext);
-  console.log(betGames);
   return (
     <TableContainer
       component={Paper}
@@ -31,6 +30,7 @@ function DenseTable({ lang, isSlipActive, editModalOpenHandler }) {
         boxShadow: "none",
         borderBottom: "1px solid #c7c7c7",
         overflow: "hidden",
+        padding: "1px",
       }}
     >
       <Table

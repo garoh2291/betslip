@@ -8,7 +8,6 @@ import "./styles.css";
 export const BetBody = ({ isSlipActive, lang, row, editModalOpenHandler }) => {
   const { setBetGames } = useContext(GameContext);
   const { id } = row;
-  console.log(id);
   const deleteRow = () => {
     setBetGames((prev) => {
       return prev.filter((game) => game.id !== id);
